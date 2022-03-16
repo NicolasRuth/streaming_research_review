@@ -3,7 +3,8 @@ library(wordcloud)
 
 ### Word Cloud ###
 
-text <- paste(articles_data$title, 
+text <- paste(articles_data$title,
+              articles_data$abstract,
                   articles_data$key1,
                   articles_data$key2,
                   articles_data$key3,
@@ -24,6 +25,19 @@ text <- gsub("spotify", "", text)
 text <- gsub("Music", "", text)
 text <- gsub("Streaming", "", text)
 text <- gsub("Spotify", "", text)
+text <- gsub("results", "", text)
+text <- gsub("can", "", text)
+text <- gsub("study", "", text)
+text <- gsub("one", "", text)
+text <- gsub("two", "", text)
+text <- gsub("via", "", text)
+text <- gsub("many", "", text)
+text <- gsub("whether", "", text)
+text <- gsub("studies", "", text)
+text <- gsub("however", "", text)
+text <- gsub("paper", "", text)
+text <- gsub("article", "", text)
+text <- gsub("also", "", text)
 
 docs <- Corpus(VectorSource(text))
 

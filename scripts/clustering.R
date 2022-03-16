@@ -32,7 +32,16 @@ stream_abstract %>% count(word, sort = TRUE)
 my_stopwords <- tibble(word = c("music", "streaming", "services", 
                                 "article","spotify", "based", "study", 
                                 "results", "research", "paper", 
-                                "findings", "digital"))
+                                "findings", "digital", "the", "of", "and",
+                                "to", "a", "in", "on", "that", "is", "this",
+                                "also", "study", "for", "we", "with", "by",
+                                "as", "are", "from", "how", "as", "it", "by",
+                                "their", "are", "have", "from", "their", "be",
+                                "how", "but", "such", "an", "or", "has", "more",
+                                "through", "these", "which", "via", "were", 
+                                "between", "our", "has", "they", "can", "out",
+                                "per", "what", "about", "than", "there", "was",
+                                "not", "over", "two", "one", "when", "been"))
 
 stream_abstract <- stream_abstract %>% 
   anti_join(my_stopwords)
@@ -90,6 +99,7 @@ top_terms %>%
   ggplot(aes(beta, term, fill = as.factor(topic))) +
   geom_col(show.legend = FALSE) +
   scale_y_reordered() +
-  labs(title = "Top 10 terms in each streaming topic",
+  labs(title = "Die 10 häufigsten Schlagworte pro Kategorie",
        x = expression(beta), y = NULL) +
   facet_wrap(~ topic, ncol = , scales = "free")
+
