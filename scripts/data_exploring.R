@@ -12,7 +12,7 @@ articles_per_year <- ggplot(articles_data,
                             aes(as.factor(year),
                             fill = as.factor(year))
                             ) +
-  geom_histogram(stat = "count") +
+  geom_histogram(stat = "count", show.legend = F) +
   scale_fill_brewer(palette = "YlOrRd") +
   labs(x = "Jahr", y = "Anzahl der Artikel") +
   theme_minimal() 
@@ -31,3 +31,4 @@ rev(sort(table(methods)))
 
 journals <- articles_data$journal
 rev(sort(table(journals)))
+length(unique(journals))

@@ -9,8 +9,10 @@ library(topicmodels)
 stream_title <- tibble(id = articles_data$ID, 
                        title = articles_data$title) %>% unnest(title)
 
+
 stream_key <- tibble(id = articles_data$ID, 
                      key = articles_data$key1) %>% unnest(key)
+
 
 stream_abstract <- tibble(id = articles_data$ID, 
                           abstract = articles_data$abstract) %>% unnest(abstract)
@@ -26,7 +28,18 @@ stream_key <- stream_key %>%
 stream_abstract <- stream_abstract %>% 
   unnest_tokens(word, abstract)
 
-# Check for most frequent words
+# Identify plurals 
+
+stream_title$word <- gsub("platforms", "platform", stream_title$word)
+stream_title$word <- gsub("recommendations", "recommendation", stream_title$word)
+
+stream_key$word <- gsub("platforms", "platform", stream_key$word)
+stream_key$word <- gsub("recommendations", "recommendation", stream_key$word)
+
+stream_abstract$word <- gsub("platforms", "platform", stream_abstract$word)
+stream_abstract$word <- gsub("recommendations", "recommendation", stream_abstract$word)
+
+# Check for most frequent words for stopwords
 stream_abstract %>% count(word, sort = TRUE)
 
 my_stopwords <- tibble(word = c("music", "streaming", "services", 
@@ -41,7 +54,10 @@ my_stopwords <- tibble(word = c("music", "streaming", "services",
                                 "through", "these", "which", "via", "were", 
                                 "between", "our", "has", "they", "can", "out",
                                 "per", "what", "about", "than", "there", "was",
-                                "not", "over", "two", "one", "when", "been"))
+                                "not", "over", "two", "one", "when", "been", 
+                                "data", "find", "new", "model", "at", "other",
+                                "self", "ways", "who"))
+
 
 stream_abstract <- stream_abstract %>% 
   anti_join(my_stopwords)
@@ -100,6 +116,6 @@ top_terms %>%
   geom_col(show.legend = FALSE) +
   scale_y_reordered() +
   labs(title = "Die 10 häufigsten Schlagworte pro Kategorie",
-       x = expression(beta), y = NULL) +
+       x = NULL, y = NULL) +
   facet_wrap(~ topic, ncol = , scales = "free")
 
