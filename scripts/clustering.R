@@ -103,7 +103,7 @@ tidy_lda <- tidy(abstract_lda)
 
 top_terms <- tidy_lda %>%
   group_by(topic) %>%
-  slice_max(beta, n = 10, with_ties = FALSE) %>%
+  slice_max(beta, n = 6, with_ties = FALSE) %>%
   ungroup() %>%
   arrange(topic, -beta)
 
@@ -115,7 +115,7 @@ top_terms %>%
   ggplot(aes(beta, term, fill = as.factor(topic))) +
   geom_col(show.legend = FALSE) +
   scale_y_reordered() +
-  labs(title = "Die 10 häufigsten Schlagworte pro Kategorie",
+  labs(title = "Die 6 häufigsten Schlagworte pro Kategorie",
        x = NULL, y = NULL) +
   facet_wrap(~ topic, ncol = , scales = "free")
 
