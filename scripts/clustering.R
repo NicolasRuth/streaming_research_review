@@ -56,7 +56,10 @@ my_stopwords <- tibble(word = c("music", "streaming", "services",
                                 "per", "what", "about", "than", "there", "was",
                                 "not", "over", "two", "one", "when", "been", 
                                 "data", "find", "new", "model", "at", "other",
-                                "self", "ways", "who"))
+                                "self", "ways", "who", "while", "use", "if", 
+                                "even", "during", "into", "its", "first", 
+                                "where", "may", "some", "however", "within",
+                                "among"))
 
 
 stream_abstract <- stream_abstract %>% 
